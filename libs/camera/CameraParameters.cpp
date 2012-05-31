@@ -375,6 +375,26 @@ const char CameraParameters::AE_BRACKET_HDR_OFF[] = "Off";
 const char CameraParameters::AE_BRACKET_HDR[] = "HDR";
 const char CameraParameters::AE_BRACKET[] = "AE-Bracket";
 
+#ifdef SAMSUNG_CAMERA_QCOM
+const char CameraParameters::FOCUS_MODE_TOUCHAF[] = "touchaf";
+const char CameraParameters::FOCUS_MODE_FACEDETECT[] = "facedetect";
+const char CameraParameters::KEY_AUTO_CONTRAST[] = "auto-contrast";
+const char CameraParameters::KEY_WDR_MODE[] = "wdr";
+const char CameraParameters::KEY_BLUR_MODE[] = "blur";
+const char CameraParameters::KEY_BEAUTY_MODE[] = "beauty";
+const char CameraParameters::KEY_ANTI_SHAKE_MODE[] = "antishake";
+const char CameraParameters::KEY_VINTAGE_MODE[] = "vintagemode";
+const char CameraParameters::VINTAGE_MODE_OFF[] = "off";
+const char CameraParameters::VINTAGE_MODE_NORMAL[] = "normal";
+const char CameraParameters::VINTAGE_MODE_WARM[] = "warm";
+const char CameraParameters::VINTAGE_MODE_COOL[] = "cool";
+const char CameraParameters::VINTAGE_MODE_BNW[] = "bnw";
+const char CameraParameters::SCENE_MODE_DAWN[] = "dusk-dawn";
+const char CameraParameters::SCENE_MODE_FALL_COLOR[] = "fall-color";
+const char CameraParameters::SCENE_MODE_TEXT[] = "text";
+const char CameraParameters::ISO_50[] = "ISO50";
+#endif
+
 static const char* portrait = "portrait";
 static const char* landscape = "landscape";
 
