@@ -121,7 +121,11 @@ const char CameraParameters::KEY_VIDEO_FRAME_FORMAT[] = "video-frame-format";
 #ifdef QCOM_HARDWARE
 const char CameraParameters::KEY_LENSSHADE[] = "lensshade";
 const char CameraParameters::KEY_SUPPORTED_LENSSHADE_MODES[] = "lensshade-values";
+#ifdef SAMSUNG_CAMERA_QCOM
+const char CameraParameters::KEY_AUTO_EXPOSURE[] = "metering";
+#else
 const char CameraParameters::KEY_AUTO_EXPOSURE[] = "auto-exposure";
+#endif
 const char CameraParameters::KEY_SUPPORTED_AUTO_EXPOSURE[] = "auto-exposure-values";
 const char CameraParameters::KEY_DENOISE[] = "denoise";
 const char CameraParameters::KEY_SUPPORTED_DENOISE[] = "denoise-values";
@@ -294,9 +298,15 @@ const char CameraParameters::LENSSHADE_ENABLE[] = "enable";
 const char CameraParameters::LENSSHADE_DISABLE[] = "disable";
 
 // Values for auto exposure settings.
+#ifdef SAMSUNG_CAMERA_QCOM
+const char CameraParameters::AUTO_EXPOSURE_FRAME_AVG[] = "matrix";
+const char CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED[] = "center";
+const char CameraParameters::AUTO_EXPOSURE_SPOT_METERING[] = "spot";
+#else
 const char CameraParameters::AUTO_EXPOSURE_FRAME_AVG[] = "frame-average";
 const char CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED[] = "center-weighted";
 const char CameraParameters::AUTO_EXPOSURE_SPOT_METERING[] = "spot-metering";
+#endif
 
 const char CameraParameters::KEY_GPS_LATITUDE_REF[] = "gps-latitude-ref";
 const char CameraParameters::KEY_GPS_LONGITUDE_REF[] = "gps-longitude-ref";
@@ -315,21 +325,21 @@ const char CameraParameters::SKIN_TONE_ENHANCEMENT_ENABLE[] = "enable";
 const char CameraParameters::SKIN_TONE_ENHANCEMENT_DISABLE[] = "disable";
 
 const char CameraParameters::KEY_SHARPNESS[] = "sharpness";
-#ifdef QCOM_HARDWARE
+#if defined QCOM_HARDWARE && !defined SAMSUNG_CAMERA_QCOM
 const char CameraParameters::KEY_MAX_SHARPNESS[] = "sharpness-max";
 const char CameraParameters::KEY_MIN_SHARPNESS[] = "sharpness-min";
 #else
 const char CameraParameters::KEY_MAX_SHARPNESS[] = "max-sharpness";
 #endif
 const char CameraParameters::KEY_CONTRAST[] = "contrast";
-#ifdef QCOM_HARDWARE
+#if defined QCOM_HARDWARE && !defined SAMSUNG_CAMERA_QCOM
 const char CameraParameters::KEY_MAX_CONTRAST[] = "contrast-max";
 const char CameraParameters::KEY_MIN_CONTRAST[] = "contrast-min";
 #else
 const char CameraParameters::KEY_MAX_CONTRAST[] = "max-contrast";
 #endif
 const char CameraParameters::KEY_SATURATION[] = "saturation";
-#ifdef QCOM_HARDWARE
+#if defined QCOM_HARDWARE && !defined SAMSUNG_CAMERA_QCOM
 const char CameraParameters::KEY_MAX_SATURATION[] = "saturation-max";
 const char CameraParameters::KEY_MIN_SATURATION[] = "saturation-min";
 #else
