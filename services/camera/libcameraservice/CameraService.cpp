@@ -913,8 +913,15 @@ status_t CameraService::Client::sendCommand(int32_t cmd, int32_t arg1, int32_t a
         if (mOrientation != orientation) {
             mOrientation = orientation;
             if (mPreviewWindow != 0) {
+#ifdef SAMSUNG_CAMERA_QCOM
+		if (mHardware->previewEnabled()) {
+			stopPreview();
+			startPreview();
+                } 
+#else
                 native_window_set_buffers_transform(mPreviewWindow.get(),
                         mOrientation);
+#endif
             }
         }
         return OK;
