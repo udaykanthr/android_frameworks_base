@@ -600,17 +600,14 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
 
         synchronized (mPublicSync) {
             if (enable) {
-                if (mRndisEnabled) {
-                    tetherUsb(true);
-                } else {
-                    mUsbTetherRequested = true;
+                if (!mRndisEnabled) {
                     usbManager.setCurrentFunction(UsbManager.USB_FUNCTION_RNDIS, false);
+                    interfaceStatusChanged("usb0", true);
                 }
+		tetherUsb(true);
             } else {
                 tetherUsb(false);
-                if (mRndisEnabled) {
-                    usbManager.setCurrentFunction(null, false);
-                }
+                usbManager.setCurrentFunction(null, false);
                 mUsbTetherRequested = false;
             }
         }
