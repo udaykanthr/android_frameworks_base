@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.AsyncResult;
 import android.util.Log;
+import android.os.SystemProperties;
 import com.android.internal.telephony.RILConstants;
 
 /**
@@ -30,6 +31,8 @@ import com.android.internal.telephony.RILConstants;
  * {@hide}
  */
 public class SamsungMSMRIL extends RIL implements CommandsInterface {
+
+    private boolean mIsSamsungCdma = SystemProperties.getBoolean("ro.ril.samsung_cdma", false);
 
     public SamsungMSMRIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
@@ -46,7 +49,6 @@ public class SamsungMSMRIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_NITZ_TIME_RECEIVED:
                 handleNitzTimeReceived(p);
                 return;
-
             default:
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
@@ -108,4 +110,22 @@ public class SamsungMSMRIL extends RIL implements CommandsInterface {
 
         return response;
     }
+
+ 
+    @Override
+    protected Object
+    responseGetPreferredNetworkType(Parcel p) {
+        int response[] = (int[]) responseInts(p);
+        // When the modem responds Phone.NT_MODE_GLOBAL, it means Phone.NT_MODE_WCDMA_PREF
+	if (response.length >= 1) {
+		if (!mIsSamsungCdma && response[0] == Phone.NT_MODE_GLOBAL) {
+		    Log.d(LOG_TAG, "Overriding network type response from global to WCDMA preferred");
+		    response[0] = Phone.NT_MODE_WCDMA_PREF;
+		}
+		mPreferredNetworkType = response[0];
+	}
+
+        return response;
+    }
+
 }
