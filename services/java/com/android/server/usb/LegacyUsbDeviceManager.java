@@ -193,6 +193,12 @@ public class LegacyUsbDeviceManager extends UsbDeviceManager {
 
         mHandler.sendEmptyMessage(MSG_SYSTEM_READY);
     }
+	
+	@Override
+	public void setCurrentFunctions(String functions, boolean makeDefault) {
+	    if (DEBUG) Slog.d(TAG, "setCurrentFunctions(" + functions + ") default: " + makeDefault);
+	    mHandler.sendMessage(MSG_SET_CURRENT_FUNCTION, functions, makeDefault);
+	}
 
     private static String addFunction(String functions, String function) {
         if (!containsFunction(functions, function)) {
