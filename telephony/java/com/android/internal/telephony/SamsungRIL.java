@@ -270,6 +270,18 @@ public class SamsungRIL extends RIL implements CommandsInterface {
                     return;
                 }
             } else {
+		       switch (rr.mRequest) { 
+					case RIL_REQUEST_GET_SIM_STATUS:
+		                if (mIccStatusChangedRegistrants != null) {
+		                    if (RILJ_LOGD) {
+		                        riljLog("ON some errors fakeSimStatusChanged: reg count="
+		                                + mIccStatusChangedRegistrants.size());
+		                    }
+		                    mIccStatusChangedRegistrants.notifyRegistrants();
+		                }
+		                break;
+		        }
+
                 rr.onError(error, ret);
                 rr.release();
                 return;
